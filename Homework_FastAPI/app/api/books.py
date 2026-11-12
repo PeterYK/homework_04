@@ -5,6 +5,7 @@ from typing import List
 router = APIRouter(prefix="/books", tags=["books"])
 
 class Book(BaseModel):
+    """Модель книги"""
     id: int
     title: str
     author: str
@@ -17,10 +18,12 @@ books_db = [
 
 @router.get("/", response_model=List[Book])
 async def get_books():
+    """Получение списка всех книг"""
     return books_db
 
 @router.get("/{book_id}", response_model=Book)
 async def get_book(book_id: int):
+    """Получение книги"""
     for book in books_db:
         if book.id == book_id:
             return book
@@ -28,5 +31,6 @@ async def get_book(book_id: int):
 
 @router.post("/", response_model=Book)
 async def create_book(book: Book):
+    """Создание книги"""
     books_db.append(book)
     return book

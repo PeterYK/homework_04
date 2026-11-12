@@ -35,14 +35,16 @@ templates = Jinja2Templates(directory="app/templates")
 
 @app.get("/")
 async def index(request: Request):
+    """Главная страница"""
     return templates.TemplateResponse(
         request=request,
         name="index.html",
         context={"request": request}
     )
-@app.get("/about/")
 
+@app.get("/about/")
 async def about(request: Request):
+    """Страница 'О сайте'"""
     return templates.TemplateResponse(
         request=request,
         name="about.html",
